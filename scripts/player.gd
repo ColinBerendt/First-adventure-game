@@ -5,6 +5,7 @@ const SPEED = 300.0
 var last_direction: Vector2 = Vector2.RIGHT
 var is_attacking: bool = false;
 var hitbox_offset: Vector2
+var attack_strength: int = 20
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var swing_sword: AudioStreamPlayer2D = $"Swing Sword"
@@ -103,4 +104,4 @@ func update_hitbox_offset() -> void:
 	
 func _on_hitbox_body_entered(body: Node2D) -> void:
 	if is_attacking and body.name.begins_with("Slime"):
-		print("Hit")
+		body.take_damage(attack_strength, position)
